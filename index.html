@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcus | Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Pirata+One&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0b;
+    --ink: #ece6d6;
+    --accent: #c9b98a;      /* old parchment gold */
+    --blood: #b5523b;       /* faded red for the big moments */
+    --image-opacity: 0.6;   /* 0 = invisible, 1 = full image */
+    --top-space: 14rem;     /* IMAGE UP/DOWN: bigger number = image sits lower, smaller = higher */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IM Fell English", Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+  }
+
+  /* The column that holds the image and the text. The image is 1080x1920 (9:16),
+     so it is sized to the column width and scrolls away with the page. */
+  .stage {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-top: var(--top-space);
+    overflow: hidden;
+  }
+
+  .stage::before {
+    content: "";
+    position: absolute;
+    top: var(--top-space); left: 0; right: 0;
+    aspect-ratio: 1080 / 1920;
+    background: url("something.jpg") center / 100% 100% no-repeat;
+    opacity: var(--image-opacity);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 62%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 62%, transparent 100%);
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* First screen: the image, with the name at the bottom of it */
+  .hero {
+    aspect-ratio: 1080 / 1920;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 1.5rem 2.5rem;
+  }
+
+  h1 {
+    font-family: "Pirata One", "IM Fell English", serif;
+    font-weight: 400;
+    font-size: clamp(3.6rem, 18vw, 5.4rem);
+    line-height: 0.95;
+    color: var(--ink);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8);
+  }
+
+  .role {
+    margin-top: 0.6rem;
+    font-family: "Uncial Antiqua", serif;
+    color: var(--accent);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+  }
+
+  .about { padding: 0 1.5rem 4rem; }
+
+  .about p { margin-bottom: 1.4rem; }
+
+  .about p:first-child::first-letter {
+    font-family: "Pirata One", serif;
+    float: left;
+    font-size: 4.2rem;
+    line-height: 0.8;
+    padding: 0.35rem 0.5rem 0 0;
+    color: var(--blood);
+  }
+
+  /* Font mixing for chosen words */
+  .rune {
+    font-family: "Uncial Antiqua", serif;
+    color: var(--accent);
+    font-size: 0.92em;
+  }
+
+  .black {
+    font-family: "Pirata One", serif;
+    color: var(--blood);
+    font-size: 1.2em;
+    line-height: 1;
+  }
+
+  em { font-style: italic; color: var(--accent); }
+
+  .divider {
+    text-align: center;
+    color: var(--accent);
+    font-family: "Uncial Antiqua", serif;
+    letter-spacing: 0.5em;
+    margin: 2rem 0;
+    opacity: 0.8;
+  }
+
+  footer {
+    padding: 0 1.5rem 2.5rem;
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  /* Social links in the empty space above the image (they go nowhere) */
+  .socials {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: var(--top-space);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0 1rem;
+    z-index: 2;
+  }
+
+  .socials a {
+    font-family: "Pirata One", "IM Fell English", serif;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.8rem 1.1rem;
+    min-height: 48px;
+    border: 1px solid rgba(201, 185, 138, 0.55);
+    border-radius: 2px;
+    background: rgba(12, 13, 11, 0.6);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .socials a:hover,
+  .socials a:focus-visible {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    outline: none;
+  }
+
+  @media (max-width: 380px) {
+    .socials a { font-size: 1.35rem; padding: 0.7rem 0.9rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <nav class="socials" aria-label="Social links">
+      <a href="#" onclick="return false;">Telegram</a>
+      <a href="#" onclick="return false;">Instagram</a>
+      <a href="#" onclick="return false;">TikTok</a>
+    </nav>
+    <div class="content">
+
+      <header class="hero">
+        <h1>Marcus</h1>
+        <p class="role">Designer &amp; Vinland Saga devotee</p>
+      </header>
+
+      <section class="about">
+        <p>
+          Hi, I'm Marcus, a designer and developer who believes the best work comes from curiosity, patience, and a willingness to keep improving. I spend most of my time designing interfaces, building digital products, and figuring out how to turn complicated ideas into simple, meaningful experiences. My journey into technology started with curiosity. I wanted to understand how the websites I visited every day actually worked. That curiosity gradually became an interest in web development, UI design, and the creative process behind digital products. Since then, I've spent countless hours learning, experimenting, breaking things, rebuilding them, and occasionally wondering why a perfectly good piece of code stopped working.
+        </p>
+
+        <p>
+          But there's another side of me that has very little to do with technology. I'm a devoted <span class="rune">Vinland Saga</span> fan. And honestly, <span class="black">Thorfinn</span> has influenced how I approach both my craft and my life more than I expected. I first met him as an angry boy chasing revenge across the sea. I stayed for what came afterward: the emptiness, the silence on the farm, and the difficult process of becoming someone who no longer needs to destroy things to give his life meaning. <em>Real change isn't loud.</em> It is repeated, stubborn effort, day after day, until the person you were is no longer the person you're becoming.
+        </p>
+
+        <div class="divider">ᚦ ᛟ ᚱ</div>
+
+        <p>
+          <span class="rune">Thors'</span> belief that a true warrior needs no sword has become something of a personal philosophy for me. I don't think good design should fight its users. It should welcome them. I want to build interfaces that feel natural, thoughtful, and easy to understand. No unnecessary complexity, no confusing interactions, and no decorative elements competing for attention. Just purposeful design that respects the person on the other side of the screen.
+        </p>
+
+        <p>
+          I care about the details: the spacing between elements, the balance of typography, the behavior of a button, and the hundred small decisions that make an experience feel complete. I also understand that good work rarely happens immediately. Some ideas need to be abandoned, some designs need to be rebuilt, and some problems require more patience than technical knowledge. That is part of the process.
+        </p>
+
+        <p>
+          I'm patient, curious, and probably more stubborn than I should be. I enjoy exploring new technologies, studying how digital products are built, and experimenting with different approaches to design and development. And yes, I can absolutely talk your ear off about <span class="rune">Askeladd</span> if you give me five minutes. He's one of the most fascinating characters I've encountered. Charming, calculating, ruthless, and carrying more contradictions than most characters could handle. Then there's <span class="rune">Canute</span>, whose transformation completely changes the way you understand power, and <span class="rune">Thorkell</span>, who somehow manages to make every situation entertaining.
+        </p>
+
+        <div class="divider">ᚠ ᛉ ᛊ</div>
+
+        <p>
+          But the slave arc remains my favorite. Watching <span class="rune">Einar</span> and <span class="black">Thorfinn</span> clear forests, cultivate fields, and slowly build a life from practically nothing reminds me that meaningful work doesn't always require recognition. Sometimes the most important things happen when nobody is watching. Most of what makes a project good is invisible: the spacing, the small decisions, the hundredth revision nobody will ever notice. I've made my peace with that.
+        </p>
+
+        <p>
+          Whether I'm developing a website, designing a brand identity, or working on a digital product, I bring the same principles to the process: purpose over decoration, simplicity over complexity, progress over perfection, and people over ego. I don't claim to know everything. I'm still learning, experimenting, and improving. But I take the things I build seriously, and I believe every project deserves thoughtful attention.
+        </p>
+
+        <p>
+          There's one line from <span class="rune">Vinland Saga</span> that stays with me: <em>You have no enemies.</em> I think there's something worth remembering in that idea, even outside the story. Not everything needs to be a competition. Not every challenge needs an opponent. And not every disagreement needs to become a battle. I'd rather spend my time building something meaningful than proving I'm better than someone else. After all, I want to create things worth keeping.
+        </p>
+
+        <p>
+          So if you're looking for a designer who cares about the details, enjoys solving problems, and believes good work should speak for itself, let's talk. And if you've watched <span class="rune">Vinland Saga</span>, we already have something to discuss. <em>A true warrior doesn't need a sword, and a good designer doesn't need ego.</em>
+        </p>
+      </section>
+
+      <footer>&copy; 2026 Marcus</footer>
+
+    </div>
+  </div>
+</body>
+</html>
